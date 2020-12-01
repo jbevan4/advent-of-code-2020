@@ -1,3 +1,2 @@
 # Advent of code 2020
-My python code for solving advent of code 2020 
-[Advent of Code](https://adventofcode.com/)
+My python code for solving [Advent of Code](https://adventofcode.com/) 2020
