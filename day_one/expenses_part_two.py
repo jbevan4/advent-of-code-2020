@@ -15,6 +15,8 @@ def find_three_expenses_that_sum_to_value(target, expenses):
         set_of_remainders.add(key - number)
 
 
-with open("expenses.txt") as expenses:
-    expenses = list(map(int, expenses.readlines()))
-    print(find_three_expenses_that_sum_to_value(target=2020, expenses=expenses))
+if __name__ == "__main__":
+    with open("expenses.txt") as expenses:
+        expenses = list(map(int, expenses.readlines()))
+        print(find_three_expenses_that_sum_to_value(
+            target=2020, expenses=expenses))

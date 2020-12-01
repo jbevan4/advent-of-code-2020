@@ -7,8 +7,9 @@ def find_two_expenses_that_sum_to_value(target, expenses):
     return None
 
 
-with open("expenses.txt") as expenses:
-    pair = find_two_expenses_that_sum_to_value(
-        target=2020, expenses=map(int, expenses.readlines()))
-    if pair != None:
-        print(pair[0] * pair[1])
+if __name__ == "__main__":
+    with open("expenses.txt") as expenses:
+        pair = find_two_expenses_that_sum_to_value(
+            target=2020, expenses=map(int, expenses.readlines()))
+        if pair is not None:
+            print(pair[0] * pair[1])
