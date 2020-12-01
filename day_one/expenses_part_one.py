@@ -1,9 +1,14 @@
-set_of_remainder_expenses = set()
-value_to_target = 2020
+def find_two_expenses_that_sum_to_value(target, expenses):
+    set_of_remainder_expenses = set()
+    for expense in expenses:
+        if expense in set_of_remainder_expenses:
+            return (expense, (target - expense))
+        set_of_remainder_expenses.add(target - expense)
+    return None
+
 
 with open("expenses.txt") as expenses:
-    for line in expenses.readlines():
-        number = int(line)
-        if number in set_of_remainder_expenses:
-            print(number * (value_to_target - number))
-        set_of_remainder_expenses.add(value_to_target - number)
+    pair = find_two_expenses_that_sum_to_value(
+        target=2020, expenses=map(int, expenses.readlines()))
+    if pair != None:
+        print(pair[0] * pair[1])

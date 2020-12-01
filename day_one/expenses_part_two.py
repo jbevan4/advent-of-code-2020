@@ -1,15 +1,20 @@
-dict_of_remainders = dict()
-value_to_target = 2020
+from expenses_part_one import find_two_expenses_that_sum_to_value
 
-with open("expenses.txt") as expenses:
-    expenses = list(map(int, expenses.readlines()))
 
+def find_three_expenses_that_sum_to_value(target, expenses):
+    dict_of_remainders = dict()
     for number in expenses:
-        dict_of_remainders[value_to_target - number] = number
+        dict_of_remainders[target - number] = number
 
     for key, value in dict_of_remainders.items():
         set_of_remainders = set()
-        for number in expenses:
-            if number in set_of_remainders:
-                print(number * value * (key - number))
-            set_of_remainders.add(key - number)
+        pair = find_two_expenses_that_sum_to_value(
+            target=key, expenses=expenses)
+        if pair:
+            return value * pair[0] * pair[1]
+        set_of_remainders.add(key - number)
+
+
+with open("expenses.txt") as expenses:
+    expenses = list(map(int, expenses.readlines()))
+    print(find_three_expenses_that_sum_to_value(target=2020, expenses=expenses))
