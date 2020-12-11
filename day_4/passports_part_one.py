@@ -10,7 +10,7 @@ def generate_passport_keys(raw_data):
     passport_keys = list()
     current_passport = ""
     for line in raw_data:
-        current_passport += line
+        current_passport += " " + line
         if line == "":
             passport_keys.append(current_passport)
             current_passport = ""
@@ -28,6 +28,5 @@ def is_passport_valid(pp):
 
 if __name__ == "__main__":
     data = ingest_file()
-    valid_count = 0
     passport_keys = generate_passport_keys(data)
     print(sum(1 for key in passport_keys if is_passport_valid(key)))
