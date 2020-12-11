@@ -1,4 +1,5 @@
 from passports_part_one import fields, ingest_file, generate_passport_keys, is_passport_valid
+
 fields = ['byr', 'iyr', 'eyr', 'hgt', 'hcl', 'ecl', 'pid']
 good_passports = []
 
@@ -74,8 +75,4 @@ if __name__ == "__main__":
     passport_keys = generate_passport_keys(data)
     good_passports = [
         passport for passport in passport_keys if is_passport_valid(passport)]
-    count = 0
-    for pp in good_passports:
-        if is_valid_data(pp):
-            count += 1
-    print(count)
+    print(sum(1 for passport in good_passports if is_valid_data(passport)))
