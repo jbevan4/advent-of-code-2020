@@ -48,34 +48,24 @@ def is_valid_byr(byr):
     return 1920 <= byr <= 2002
 
 
+def is_valid_cid(cid):
+    return True
+
+
 def is_valid_data(passport):
     passport = passport.split()
     dict_of_values = {}
+    dict_of_function = {"byr": is_valid_byr, "iyr": is_valid_iyr,
+                        "eyr": is_valid_eyr, "hgt": is_valid_hgt, "hcl": is_valid_hcl,
+                        "ecl": is_valid_ecl, "pid": is_valid_pid, "cid": is_valid_cid}
     for fields in passport:
         key, value = fields.split(":")
         dict_of_values[key] = value
 
-    if not is_valid_byr(dict_of_values["byr"]):
-        return False
-
-    if not is_valid_iyr(dict_of_values["iyr"]):
-        return False
-
-    if not is_valid_eyr(dict_of_values["eyr"]):
-        return False
-
-    if not is_valid_hgt(dict_of_values["hgt"]):
-        return False
-
-    if not is_valid_hcl(dict_of_values["hcl"]):
-        return False
-
-    if not is_valid_ecl(dict_of_values["ecl"]):
-        return False
-
-    if not is_valid_pid(dict_of_values["pid"]):
-        return False
-
+    for key, value in dict_of_values.items():
+        valid_fields = []
+        if not dict_of_function[key](value):
+            return False
     return True
 
 
