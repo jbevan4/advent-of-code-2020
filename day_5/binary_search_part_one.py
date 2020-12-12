@@ -3,25 +3,13 @@ def ingest_file():
         return [seat_id.strip() for seat_id in seat_ids.readlines()]
 
 
-def search_seat_row_from_id(seat_id):
-    range_of_rows = range(128)
-    for letter in seat_id[:7]:
-        if letter == "F":
-            range_of_rows = range_of_rows[:len(range_of_rows) // 2]
-            continue
-        if letter == "B":
-            range_of_rows = range_of_rows[len(range_of_rows) // 2:]
-    return range_of_rows[0]
-
-
-def search_seat_column_from_id(seat_id):
-    range_of_columns = range(8)
-    for letter in seat_id[7:]:
-        if letter == "L":
-            range_of_columns = range_of_columns[:len(range_of_columns) // 2]
-        if letter == "R":
-            range_of_columns = range_of_columns[len(range_of_columns) // 2:]
-    return range_of_columns[0]
+def extract_position_from_id(seat_id, upper_bound_character, lower_bound_character, range_to_search):
+    for letter in seat_id:
+        if letter == upper_bound_character:
+            range_to_search = range_to_search[:len(range_to_search) // 2]
+        if letter == lower_bound_character:
+            range_to_search = range_to_search[len(range_to_search) // 2:]
+    return range_to_search[0]
 
 
 if __name__ == "__main__":
@@ -29,7 +17,9 @@ if __name__ == "__main__":
     result = []
     curr_max = 0
     for seat_id in seat_ids:
-        row = search_seat_row_from_id(seat_id)
-        column = search_seat_column_from_id(seat_id)
+        row = extract_position_from_id(
+            seat_id=seat_id[:7], upper_bound_character="F", lower_bound_character="B", range_to_search=range(128))
+        column = extract_position_from_id(
+            seat_id=seat_id[7:], upper_bound_character="L", lower_bound_character="R", range_to_search=range(8))
         curr_max = max(curr_max, row * 8 + column)
     print(curr_max)
