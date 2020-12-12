@@ -14,7 +14,6 @@ def extract_position_from_id(seat_id, upper_bound_character, lower_bound_charact
 
 if __name__ == "__main__":
     seat_ids = ingest_file()
-    result = []
     curr_max = 0
     for seat_id in seat_ids:
         row = extract_position_from_id(
