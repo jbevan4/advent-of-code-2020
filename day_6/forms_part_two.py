@@ -10,7 +10,6 @@ def calculate_total_with_multiple_people(form):
     each_persons_answer = form.split("\n")
     total_number_of_people = len(each_persons_answer)
     answer_count = defaultdict(int)
-    result = 0
     for answer in each_persons_answer:
         if len(answer) > 1:
             for letter in answer:
